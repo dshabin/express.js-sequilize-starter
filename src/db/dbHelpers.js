@@ -26,6 +26,9 @@ class DbHelper {
                     model: database.User,
                   }]
             });
+            if(!user){
+                return null
+            }
             user = user.toJSON();
             delete user.User.password;
             return user.User;

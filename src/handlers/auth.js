@@ -10,9 +10,9 @@ class Handlers {
       const userWithToken = await DbHelper.signup(username, password);
       const data = userWithToken.user;
       data.token = userWithToken.token;
-      this.successHandler(res, {data});
+      res.json(data);
     } catch (e) {
-      this.errorHandler(e, res);
+      res.json({ error: e.message });
     }
   }
 
@@ -22,11 +22,11 @@ class Handlers {
       const token = req.headers.authorization
       const user = await DbHelper.getUserbyToken(token);
       if (!user) {
-        throw { message: 'Invalid Username or passsword.' }
+        res.json({ message: 'Invalid Username or passsword.'})
       }
-      this.successHandler(res, {data : user});
+      res.json(user);
     } catch (e) {
-      this.errorHandler(e, res);
+      res.json({ error: e.message });
     }
   }
 
@@ -41,20 +41,11 @@ class Handlers {
       }
       const data = userWithToken.user;
       data.token = userWithToken.token;
-      this.successHandler(res, {data});
+      res.json(data);
     } catch (e) {
-      this.errorHandler(e, res);
+      res.json({ error: e.message });
     }
   }
-
-  successHandler = (res, data) => {
-    res.status(200).json(data);
-  }
-
-  errorHandler = (e, res) => {
-    res.status(e.code || 400).json({ errorMessage: e.message });
-  }
-
 }
 
 export default new Handlers();
