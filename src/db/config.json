@@ -1,0 +1,7 @@
+{
+    "dialect": "sqlite",
+    "storage": "./database.sqlite3",
+    "define": {
+        "freezeTableName": true
+    }
+}
