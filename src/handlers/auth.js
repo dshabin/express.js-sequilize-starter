@@ -10,9 +10,9 @@ class Handlers {
       const userWithToken = await DbHelper.signup(username, password);
       const data = userWithToken.user;
       data.token = userWithToken.token;
-      res.json(data);
+      res.json({data});
     } catch (e) {
-      res.json({ error: e.message });
+      res.json({ error: {message :e.message }});
     }
   }
 
@@ -24,9 +24,9 @@ class Handlers {
       if (!user) {
         res.json({ message: 'Invalid Username or passsword.'})
       }
-      res.json(user);
+      res.json({data : user});
     } catch (e) {
-      res.json({ error: e.message });
+      res.json({ error: {message :e.message }});
     }
   }
 
@@ -41,9 +41,9 @@ class Handlers {
       }
       const data = userWithToken.user;
       data.token = userWithToken.token;
-      res.json(data);
+      res.json({data});
     } catch (e) {
-      res.json({ error: e.message });
+      res.json({ error: {message :e.message }});
     }
   }
 }
